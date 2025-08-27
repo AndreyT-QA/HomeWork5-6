@@ -123,8 +123,7 @@ public class RegisterFormPage extends AbsBasePage{
         "Имя пользователя: %s\nЭлектронная почта: %s\nДата рождения: %s\nУровень языка: %s", username, email,
         formatDate(birthdate), languageLevel);
 
-    Assertions.assertEquals("Введенные и отображаемые данные не совпадают",
-        expectedOutData, actualOutputData);
+    Assertions.assertEquals(expectedOutData, actualOutputData, "Введенные и отображаемые данные не совпадают");
 
     logger.info("Проверка вывода данных прошла успешно!");
 
