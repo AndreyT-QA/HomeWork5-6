@@ -2,15 +2,14 @@ package main;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import pages.RegisterFormPage;
 
 public class TestRegisterFormPage extends AbsBaseTestSuite{
   private static final Logger logger = LogManager.getLogger(TestRegisterFormPage.class);
 
   @Test
-  @DisplayName("Тест № 1: Пароли совпадают")
+  @DisplayName("Тест № 1: Пароли совпадают-регистрация успешна")
   public void formRegister() {
     String userName = "Иван";
     String email = "homework@test.ru";
@@ -18,7 +17,6 @@ public class TestRegisterFormPage extends AbsBaseTestSuite{
     String confirmPassword = "12345";
     String birthdate = "01.01.1990";
     String languageLevel = "intermediate";
-
 
     RegisterFormPage mainPage = new RegisterFormPage(driver);
     logger.info("Открытие страницы");
@@ -38,7 +36,7 @@ public class TestRegisterFormPage extends AbsBaseTestSuite{
     logger.info("Регистрация пользователя");
     mainPage.clickButtonRegister();
     logger.info("Проверка отображения данных");
-    mainPage.verifyResult(userName, email, birthdate, languageLevel);
+    mainPage.verifyResult(userName, email, birthdate, languageLevel, true);
   }
 
     @Test
@@ -49,6 +47,7 @@ public class TestRegisterFormPage extends AbsBaseTestSuite{
       String password = "12345";
       String confirmPassword = "54321";
       String birthdate = "01.01.1990";
+      String languageLevel = "intermediate";
 
       RegisterFormPage mainPage = new RegisterFormPage(driver);
       logger.info("Открытие страницы");
@@ -64,10 +63,11 @@ public class TestRegisterFormPage extends AbsBaseTestSuite{
       mainPage.inputBirthdate(birthdate);
       logger.info("Выбор уровня знания языка");
       mainPage.clickDropDownLevel();
-      mainPage.clickLevelIntermediate();
+      mainPage.selectLanguageLevel(languageLevel);
       logger.info("Регистрация пользователя");
       mainPage.clickButtonRegister();
-
+      logger.info("Проверка отображения данных");
+      mainPage.verifyResult(userName, email, birthdate, languageLevel, false);
   }
 }
 

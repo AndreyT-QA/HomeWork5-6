@@ -82,7 +82,6 @@ public class RegisterFormPage extends AbsBasePage{
   public void selectLanguageLevel(String languageLevel) {
     Select languageSelect = new Select($(DROPDOWN_LANGUAGE_LEVEL));
     languageSelect.selectByValue(languageLevel);
-//    logger.info("Выбран уровень языка: " + languageLevel);
   }
 
   public String getLanguageLevel(String languageLevel) {
@@ -94,31 +93,29 @@ public class RegisterFormPage extends AbsBasePage{
       default: return languageLevel;
     }
   }
-  public void clickLevelBeginner() {
-    $(LANGUAGE_LEVEL_BEGINNER).click();
-  }
-  public void clickLevelIntermediate() {
-    $(LANGUAGE_LEVEL_INTERMEDIATE).click();
-  }
-  public void clickLevelAdvanced() {
-    $(LANGUAGE_LEVEL_ADVANCED).click();
-  }
-  public void clickLevelNative() {
-    $(LANGUAGE_LEVEL_NATIVE).click();
-  }
+//  public void clickLevelBeginner() {
+//    $(LANGUAGE_LEVEL_BEGINNER).click();
+//  }
+//  public void clickLevelIntermediate() {
+//    $(LANGUAGE_LEVEL_INTERMEDIATE).click();
+//  }
+//  public void clickLevelAdvanced() {
+//    $(LANGUAGE_LEVEL_ADVANCED).click();
+//  }
+//  public void clickLevelNative() {
+//    $(LANGUAGE_LEVEL_NATIVE).click();
+//  }
 
   public void clickButtonRegister() {
     $(REGISTER).click();
   }
 
-  public void verifyResult(String username, String email, String birthdate, String languageLevel) {
+  public void verifyResult(String username, String email, String birthdate, String languageLevel, boolean shouldBeDisplayed) {
 
-    if (!$(RESULT).isDisplayed()) {
-      Assertions.fail("Результат не отображается на странице");
-    }
+    boolean isDisplayed = $(RESULT).isDisplayed();
 
+    if ($(RESULT).isDisplayed()) {
     String actualOutputData = $(RESULT).getText();
-
     String expectedOutData = String.format(
         "Имя пользователя: %s\nЭлектронная почта: %s\nДата рождения: %s\nУровень языка: %s", username, email,
         formatDate(birthdate), languageLevel);
@@ -126,7 +123,10 @@ public class RegisterFormPage extends AbsBasePage{
     Assertions.assertEquals(expectedOutData, actualOutputData, "Введенные и отображаемые данные не совпадают");
 
     logger.info("Проверка вывода данных прошла успешно!");
+  } else {
+      Assertions.assertFalse(isDisplayed, "Результат не должен отображаться при ошибках валидации");
+      logger.info("Ожидаемое поведение: результаты не отображаются при ошибках валидации");
+    }
 
   }
-
 }
