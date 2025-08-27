@@ -1,0 +1,7 @@
+.idea
+*.iml
+target
+src/main/java/org/example/
+out
+.DS_Store
+*.log
