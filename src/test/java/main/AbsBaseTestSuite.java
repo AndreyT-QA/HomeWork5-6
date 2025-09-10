@@ -5,13 +5,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 
+import java.net.MalformedURLException;
+
 public abstract class AbsBaseTestSuite {
 
   protected WebDriver driver;
   protected String mode;
 
   @BeforeEach
-  public void init() {
+  public void init() throws MalformedURLException {
     this.driver = new WebDriverFactory().create(mode);
   }
 

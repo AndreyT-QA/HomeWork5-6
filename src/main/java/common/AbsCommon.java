@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.AbsBasePage;
@@ -18,6 +19,7 @@ import java.util.List;
 public abstract class AbsCommon {
 
   protected WebDriver driver;
+  protected RemoteWebDriver remoteWebDriver;
   protected Actions actions;
   protected Waiter wait;
   protected final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(10);
@@ -27,6 +29,7 @@ public abstract class AbsCommon {
     this.driver = driver;
     this.actions = new Actions(driver);
     this.wait = new Waiter(driver);
+    this.remoteWebDriver = remoteWebDriver;
   }
 
   protected WebElement $(By locator) {

@@ -12,11 +12,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.net.MalformedURLException;
+
 public class WebDriverFactory {
 
   private String browser = System.getProperty("browser");
 
-  public WebDriver create(String mode){
+  public WebDriver create(String mode) throws MalformedURLException {
     switch (browser) {
       case "chrome": {
         WebDriverManager.chromedriver().setup();
