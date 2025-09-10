@@ -36,7 +36,7 @@ public class ChromeSettings implements ISettings {
 
     }});
     chromeOptions.setCapability("browserName", "Chrome");
-    chromeOptions.setCapability("browserVersion", "128.0");
+    chromeOptions.setCapability("browserVersion", "latest");
 
     try {
       RemoteWebDriver remoteWebDriver = new RemoteWebDriver(new URL("http://193.104.57.173/wd/hub"), chromeOptions);
