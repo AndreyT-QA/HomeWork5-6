@@ -43,7 +43,7 @@ public class WebDriverFactory {
 
         }});
 //        RemoteWebDriver remoteWebDriver = new RemoteWebDriver(new URL("http://193.104.57.173/wd/hub"), options);
-        options.setCapability("browserName", "сhrome");
+        options.setCapability("browserName", "chrome");
         options.setCapability("browserVersion", "latest");
 
         RemoteWebDriver remoteWebDriver;
