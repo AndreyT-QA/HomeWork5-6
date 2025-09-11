@@ -43,11 +43,12 @@ public class WebDriverFactory {
 
         }});
 //        RemoteWebDriver remoteWebDriver = new RemoteWebDriver(new URL("http://193.104.57.173/wd/hub"), options);
-        options.setCapability("browserName", "Chrome");
+        options.setCapability("browserName", "сhrome");
         options.setCapability("browserVersion", "latest");
 
+        RemoteWebDriver remoteWebDriver;
         try {
-          RemoteWebDriver remoteWebDriver = new RemoteWebDriver(new URL("http://193.104.57.173/wd/hub"), options);
+          remoteWebDriver = new RemoteWebDriver(new URL("http://193.104.57.173/wd/hub"), options);
         } catch (MalformedURLException e) {
           throw new RuntimeException(e);
         }
@@ -56,7 +57,7 @@ public class WebDriverFactory {
           options.addArguments(mode);
         }
         options.addArguments("--remote-allow-origins=*"); //добавлено, т.к. автотесты падали по ошибке
-        return new ChromeDriver(options);
+        return remoteWebDriver;
       }
       case "firefox": {
         WebDriverManager.firefoxdriver().setup();
