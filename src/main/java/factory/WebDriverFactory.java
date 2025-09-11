@@ -42,22 +42,32 @@ public class WebDriverFactory {
           }});
 
         }});
-//        RemoteWebDriver remoteWebDriver = new RemoteWebDriver(new URL("http://193.104.57.173/wd/hub"), options);
         options.setCapability("browserName", "chrome");
         options.setCapability("browserVersion", "latest");
 
-        RemoteWebDriver remoteWebDriver;
-        try {
-          remoteWebDriver = new RemoteWebDriver(new URL("http://193.104.57.173/wd/hub"), options);
-        } catch (MalformedURLException e) {
-          throw new RuntimeException(e);
-        }
-
+//        try {
+//          remoteWebDriver = new RemoteWebDriver(new URL("http://193.104.57.173/wd/hub"), options);
+//        } catch (MalformedURLException e) {
+//          throw new RuntimeException(e);
+//        }
         if (mode != null) {
           options.addArguments(mode);
         }
         options.addArguments("--remote-allow-origins=*"); //добавлено, т.к. автотесты падали по ошибке
-        return remoteWebDriver;
+
+        try {
+          System.out.println("Попытка подключения к Selenoid...");
+          return new RemoteWebDriver(new URL("http://193.104.57.173:4444/wd/hub"), options);
+        } catch (Exception e) {
+          System.out.println("Подключение к Selenoid не выполнено, используем ChromeDriver: " + e.getMessage());
+          return new ChromeDriver(options);
+        }
+
+//        if (mode != null) {
+//          options.addArguments(mode);
+//        }
+//        options.addArguments("--remote-allow-origins=*"); //добавлено, т.к. автотесты падали по ошибке
+//        return remoteWebDriver;
       }
       case "firefox": {
         WebDriverManager.firefoxdriver().setup();
