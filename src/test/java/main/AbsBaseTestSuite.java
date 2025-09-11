@@ -13,7 +13,7 @@ public abstract class AbsBaseTestSuite {
   protected String mode;
 
   @BeforeEach
-  public void init() throws MalformedURLException {
+  public void init() {
     this.driver = new WebDriverFactory().create(mode);
   }
 

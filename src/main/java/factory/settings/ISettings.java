@@ -7,5 +7,5 @@ import java.net.MalformedURLException;
 
 public interface ISettings {
 
-  AbstractDriverOptions settings(String... userArgs) throws MalformedURLException;
+  AbstractDriverOptions settings(String... userArgs);
 }
